@@ -101,6 +101,7 @@ class Form extends React.Component{
         const totalMonths = sortedThings[sortedThings.length - 1].months 
         let oneSave = totalAmount / totalMonths
         let monthsOfChanges = [];
+        // counting the save amounts
         const totalSaves =  sortedThings.map((thing, index) => {
             if (oneSave  < thing.amount / thing.months) {
                 oneSave = (totalAmount - thing.amount) / (totalMonths - thing.months)

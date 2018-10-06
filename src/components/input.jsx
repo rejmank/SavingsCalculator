@@ -5,15 +5,18 @@ const Input = (props) => {
     return (
         <span>
             <input 
+                required
                 value={props.name} 
                 onChange={(val)=>props.onNameChange(val, props.thing.id)} 
                 placeholder="name of thing"/>
             <input 
+                required
                 type="number"
                 value={props.amount} 
                 onChange={(val)=> props.onValueChange(val, props.thing.id)} 
                 placeholder="needed fundings"/>
             <input 
+                required
                 type="number"
                 value={props.weeks} 
                 onChange={(val)=> props.onMonthsChange(val, props.thing.id)} 
