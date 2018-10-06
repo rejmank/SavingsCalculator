@@ -54,9 +54,9 @@ const StyledCell = Styled.td`
 `
 
 export { StyledLayout,
-        StyledInput,
-        StyledH1,
-        StyledText,
-        StyledButton,
-        StyledTable,
-        StyledCell }
+	StyledInput,
+	StyledH1,
+	StyledText,
+	StyledButton,
+	StyledTable,
+	StyledCell }
