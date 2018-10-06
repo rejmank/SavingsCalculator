@@ -1,15 +1,13 @@
 import React from 'react';
 
 const ResultsTable = (props) => {
-    console.log(props.changes.length);
     return (
         <table>
             <tbody>
             {
                     props.amounts.map((saveAmount, i) => {
                     return (<tr key={i}>
-                        <td>{saveAmount}</td>
-                        
+                        <td>{saveAmount}</td>    
                         <td>{i === 0 ? `1. - ${props.changes[0]}. měsíc` :`${props.changes[i - 1]}. - ${props.changes[i]}. měsíc` }</td>
                     </tr>)   
                 })

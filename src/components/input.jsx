@@ -12,12 +12,14 @@ const Input = (props) => {
             <input 
                 required
                 type="number"
+                min='1'
                 value={props.amount} 
                 onChange={(val)=> props.onValueChange(val, props.thing.id)} 
                 placeholder="needed fundings"/>
             <input 
                 required
                 type="number"
+                min='1'
                 value={props.weeks} 
                 onChange={(val)=> props.onMonthsChange(val, props.thing.id)} 
                 placeholder="months"/>

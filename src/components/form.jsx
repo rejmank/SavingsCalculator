@@ -4,12 +4,22 @@ import ResultsTable from './table';
 
 
 class Form extends React.Component{
-    state = {
-        things: [],
-        results: [],
-        changes: []
+    LastId = 0;
+    constructor() {
+        super();
+        this.state = {
+            things: [],
+            results: [],
+            changes: []
+        }
+       
+        this.addRow = this.addRow.bind(this);
+        this.onNameChange = this.onNameChange.bind(this);
+        this.onMonthsChange = this.onMonthsChange.bind(this);
+        this.onValueChange = this.onValueChange.bind(this);
+        this.removeRow = this.removeRow.bind(this);
+        this.count = this.count.bind(this);
     }
-    LastId = 0
 
     render(){
         return (
@@ -17,7 +27,7 @@ class Form extends React.Component{
                 <button onClick={ () => {this.addRow(this.state.things)}}>+</button>
                 <form onSubmit={this.count}>
                     {
-                        this.state? this.state.things.map(thing => {
+                        this.state.things.length > 0? this.state.things.map(thing => {
                             return (
                                 <div key={thing.id}>
                                     <Input 
@@ -34,10 +44,10 @@ class Form extends React.Component{
                 <button type="submit">save</button>
             </form>
             {
-                <ResultsTable
+               this.state.results.length > 0 ? <ResultsTable
                     amounts={this.state.results}
                     changes={this.state.changes}
-                />
+                /> : null
             }
             </div>
             )
@@ -47,11 +57,13 @@ class Form extends React.Component{
         this.setState( {
             things: this.state.things.filter((thing) => {
             return thing.id !== id
-            })    
+            }),
+            results: [],
+            changes: []   
         })
     }
 
-    addRow = (prevThings) => {
+    addRow(prevThings) {
         this.setState({
             things: [...prevThings, {
                 id: this.LastId + 1 ,
@@ -63,32 +75,47 @@ class Form extends React.Component{
         this.LastId += 1
     }
 
-    onNameChange = (value, id) => {
-        this.state.things.map((obj)=> {
-            if(obj.id === id) {
-                obj.name = value.target.value
-            }
+    onNameChange(value, id) {
+        this.setState({
+            things: this.state.things.map((obj)=> {
+                if(obj.id === id) {
+                    obj.name = value.target.value
+                    return obj;
+                } else {
+                    return obj;
+                }
+            })
         })
 
     }
 
-    onValueChange = (value, id) => {
-        this.state.things.map((obj)=> {
-            if(obj.id === id) {
-                obj.amount = Number(value.target.value)
-            }
+    onValueChange(value, id) {
+        this.setState({
+            things: this.state.things.map((obj)=> {
+                if(obj.id === id) {
+                    obj.amount = Number(value.target.value)
+                    return obj;
+                } else {
+                    return obj;
+                }
+            })
         })
     }
 
-    onMonthsChange = (value, id) => {
-        this.state.things.map((obj)=> {
-            if(obj.id === id) {
-                obj.months = Number(value.target.value)
-            }
+    onMonthsChange(value, id) {
+        this.setState({
+            things: this.state.things.map((obj)=> {
+                if(obj.id === id) {        
+                    obj.months = Number(value.target.value)
+                    return obj;
+                } else {
+                    return obj;
+                }
+            })
         })
     }
 
-    count = (submit) => {
+    count (submit) {
         submit.preventDefault()
         const things = this.state.things
         const sortedThings = things.sort((a, b)=> {
@@ -116,7 +143,7 @@ class Form extends React.Component{
         monthsOfChanges.push(sortedThings[sortedThings.length - 1].months)
 
         this.setState({
-            results: [... new Set(totalSaves)],
+            results: [...new Set(totalSaves)],
             changes: monthsOfChanges
         })
 
