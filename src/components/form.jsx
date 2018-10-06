@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from './input'
 import ResultsTable from './table';
-import { StyledLayout, StyledText, StyledH1, StyledButton } from './styles';
+import { StyledLayout, StyledH1, StyledButton } from './styles';
 
 
 class Form extends React.Component{
