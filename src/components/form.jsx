@@ -26,7 +26,9 @@ class Form extends React.Component{
         return (
             <StyledLayout>
                 <StyledH1>Spořící kalkulačka</StyledH1>
-                <StyledButton onClick={ () => {this.addRow(this.state.things)}}>Přidat řádek</StyledButton>
+                <StyledButton onClick={ () => {this.addRow(this.state.things)}}> 
+                    {this.state.things.length > 0? 'Přidat další řádek' : 'Přidat první řádek'}
+                </StyledButton>
                { this.state.things.length > 0? <form onSubmit={this.count}>
                     {
                          this.state.things.map(thing => {
