@@ -1,34 +1,34 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { StyledInput, StyledButton } from './styles';
 
 const Input = (props) => {
     return (
         <span>
-            <input 
+            <StyledInput 
                 required
                 value={props.name} 
                 onChange={(val)=>props.onNameChange(val, props.thing.id)} 
-                placeholder="name of thing"/>
-            <input 
+                placeholder="Na co chcete šetřit?"/>
+            <StyledInput 
                 required
                 type="number"
                 min='1'
                 value={props.amount} 
                 onChange={(val)=> props.onValueChange(val, props.thing.id)} 
-                placeholder="needed fundings"/>
-            <input 
+                placeholder="Kolik je potřeba?"/>
+            <StyledInput 
                 required
                 type="number"
                 min='1'
                 value={props.weeks} 
                 onChange={(val)=> props.onMonthsChange(val, props.thing.id)} 
-                placeholder="months"/>
-            <button 
-                onClick={() => props.onButtonClick(props.thing.id)}>-
-                </button>
+                placeholder="Za kolik měsíců?"/>
+            <StyledButton 
+                color='#f45c42'
+                onClick={() => props.onButtonClick(props.thing.id)}>✘
+            </StyledButton>
         </span>
     )
 }
-
 
 export default Input

@@ -1,6 +1,7 @@
 import React from 'react'
 import Input from './input'
 import ResultsTable from './table';
+import { StyledLayout, StyledText, StyledH1, StyledButton } from './styles';
 
 
 class Form extends React.Component{
@@ -23,11 +24,12 @@ class Form extends React.Component{
 
     render(){
         return (
-            <div>
-                <button onClick={ () => {this.addRow(this.state.things)}}>+</button>
-                <form onSubmit={this.count}>
+            <StyledLayout>
+                <StyledH1>Spořící kalkulačka</StyledH1>
+                <StyledButton onClick={ () => {this.addRow(this.state.things)}}>Přidat řádek</StyledButton>
+               { this.state.things.length > 0? <form onSubmit={this.count}>
                     {
-                        this.state.things.length > 0? this.state.things.map(thing => {
+                         this.state.things.map(thing => {
                             return (
                                 <div key={thing.id}>
                                     <Input 
@@ -39,17 +41,23 @@ class Form extends React.Component{
                                     />  
                                 </div>
                             ) 
-                    }) : null
-                }
-                <button type="submit">save</button>
-            </form>
+                    }) 
+                    }
+                
+                <StyledButton type="submit">Spočítat</StyledButton>
+            </form> : null
+               }
             {
-               this.state.results.length > 0 ? <ResultsTable
+               this.state.results.length > 0 ? (
+                <div>
+                <StyledH1>Je potřeba šetřit: </StyledH1>
+                   <ResultsTable
                     amounts={this.state.results}
                     changes={this.state.changes}
-                /> : null
+                />
+                </div>) : null
             }
-            </div>
+            </StyledLayout>
             )
         }
 
@@ -126,14 +134,14 @@ class Form extends React.Component{
         })
         const totalAmount = amounts.reduce((a,b)=> a+b, 0)
         const totalMonths = sortedThings[sortedThings.length - 1].months 
-        let oneSave = totalAmount / totalMonths
+        let oneSave = Math.round(totalAmount / totalMonths)
         let monthsOfChanges = [];
         // counting the save amounts
         const totalSaves =  sortedThings.map((thing, index) => {
             if (oneSave  < thing.amount / thing.months) {
-                oneSave = (totalAmount - thing.amount) / (totalMonths - thing.months)
+                oneSave = Math.round((totalAmount - thing.amount) / (totalMonths - thing.months))
                 monthsOfChanges.push(thing.months)
-                return thing.amount / thing.months
+                return Math.round(thing.amount / thing.months)
             } else {
 
                 return oneSave
