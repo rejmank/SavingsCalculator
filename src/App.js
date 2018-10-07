@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import Form from './components/form.jsx'; 
+import React, { Component } from 'react'
+import Container from './components/form.jsx' 
 
 class App extends Component {
-  render() {
-    return (
-      <Form/>
-    );
+	render() {
+		return (
+			<Container/>
+		)
   }
 }
 
-export default App;
+export default App

@@ -4,7 +4,7 @@ import ResultsTable from './table';
 import { StyledLayout, StyledH1, StyledButton } from './styles';
 
 
-class Form extends React.Component{
+class Container extends React.Component{
     LastId = 0;
     constructor() {
         super();
@@ -160,4 +160,4 @@ class Form extends React.Component{
     }
 
 }
-export default Form
+export default Container
